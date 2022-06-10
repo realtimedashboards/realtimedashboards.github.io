@@ -163,6 +163,10 @@ height: 180px;
   }
 }
 @media only screen and (max-width: 800px) {
+    .counterView__card_val
+{
+    font-size: 5rem;
+}
 }
 @media only screen and (max-width: 600px) {
     .rowFlex{
