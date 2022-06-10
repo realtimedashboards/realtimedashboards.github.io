@@ -168,4 +168,16 @@
   padding: 4px;
   border-left: 1px solid black;
 }
+
+@media only screen and (max-width: 600px) {
+  .rowFlex {
+    display: block;
+  }
+  .analyticsDashboard {
+    padding: 10px 10px;
+  }
+  .taLogo, .instanceViewCard, .lineViewCard {
+    width: auto;
+  }
+}
 /*# sourceMappingURL=style.css.map */
