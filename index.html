@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adobe Analytics- Wrench Group</title>
+  
     <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -17,7 +19,7 @@
   </div>
 <header>
   <nav class="analyticsDashboard__client">
-  <div class="analyticsDashboard__client_brandLogo" >Wrench Group</div><span class="analyticsDashboard__client_title">Adobe Analytics</span>  </div>
+  <div class="analyticsDashboard__client_brandLogo" >Wrench Group</div><span class="analyticsDashboard__client_title">Coolray.com - Refreshed every 10 seconds</span>  </div>
 </header>
 <main class="analyticsDashboard">
   <div class="rowFlex">
@@ -26,13 +28,13 @@
         <div class="rowFlex">
           <div class="col-md-6">
         <section class="counterView__card">
-          <div class="counterView__card_label">Page Views</div>
+          <div class="counterView__card_label">Page Views <span id="counterDenote"></span></div>
           <div class="counterView__card_val" id="pageViewsContainer">0</div>
         </section>  
           </div>
           <div class="col-md-6">
             <section class="counterView__card">
-              <div class="counterView__card_label">Instance Views</div>
+              <div class="counterView__card_label"> Site Sections <span id="counterInstances"></span></div>
               <div class="counterView__card_val" id="instanceViewsContainer">0</div>
             </section>
           </div>
@@ -40,11 +42,13 @@
         </div>
          </section>
          <section class="counterView__card pageViewCard">
+            <div class="counterView__card_label"> Most Pages Viewed in last 15 Mins</div>
           <div id="pageViewsBarChart"></div>
               </section>
     </div>
     <div class="col-md-4">
       <section class="counterView__card locationViewCard">
+        <div class="counterView__card_label"> Regions viewing the site</div>
     <div id="locationViewsBarChart"></div>
         </section>
         <section class="counterView__card pageLocationcard">
@@ -72,10 +76,12 @@
 
      
         <section class="counterView__card lineViewCard">
+            <div class="counterView__card_label"> Page Views Trend - 15 Mins Lookback</div>
           <div id="pageViewsLineChart"></div>
         </section>
      
       <section class="counterView__card instanceViewCard">
+        <div class="counterView__card_label"> Number of Sections Viewed (Size = Sections Viewed)</div>
         <div id="instanceViewsBarChart"></div>
             </section>
     </div>

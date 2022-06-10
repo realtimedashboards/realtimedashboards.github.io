@@ -58,14 +58,35 @@ var getPageViews = (params)=>{
            document.getElementById('pageViewsContainer').innerText=pageViewsData.report.totals[0];
     
             foo =  loadBarChart('pageViewsBarChart',580,580,pageViewJson);
-            line= loadLineChart('#pageViewsLineChart',560,180,pageViewJson);
+            line= loadLineChart('#pageViewsLineChart',560,190,pageViewJson);
           }) ;
           
     setInterval(() => {
     MarketingCloud.makeRequest(config, method, params,function(res){
        let pageViewsData=res.responseJSON;
        let pageViewJson=res.responseJSON.report.data;
-       document.getElementById('pageViewsContainer').innerText=pageViewsData.report.totals[0];
+
+
+       let pageViewPrevious=Number(document.getElementById('pageViewsContainer').innerText);
+       let currentPageView=Number(pageViewsData.report.totals[0]);
+       let actualCount=0;
+       if(currentPageView>pageViewPrevious)
+       {
+         actualCount=currentPageView+(currentPageView*0.05);
+         generateCounterNode('plus',actualCount-pageViewPrevious)
+       }
+       else if(currentPageView<pageViewPrevious)
+       {
+         actualCount=currentPageView-(currentPageView*0.05); 
+         generateCounterNode('minus',pageViewPrevious-actualCount)
+       }
+       else
+       {
+         actualCount=currentPageView+1;
+         generateCounterNode('plus',actualCount-pageViewPrevious)
+       }
+       console.log(pageViewPrevious,currentPageView,actualCount);
+       document.getElementById('pageViewsContainer').innerText=Math.round(actualCount).toString();
     
        foo.updateBarChart(pageViewJson);
        line.updateLineChart(pageViewJson);
@@ -95,24 +116,7 @@ var getPageViews = (params)=>{
  } 
  
  var getPageViewsGeoCity = (params)=>{
- var foolocation;
-    MarketingCloud.makeRequest(config, method, params,function(res){
-        let pageViewsData=res.responseJSON;
-        let pageViewJson=res.responseJSON.report.data; 
-         //   document.getElementById('locationViewsContainer').innerText=pageViewsData.report.data[0].breakdown.length;
-       foolocation= loadlocationBarChart('#locationViewsBarChart',580,380,pageViewJson);
-      console.log('getPageViewsGeoCity',pageViewJson);
-    }) ;
-
-    setInterval(() => {
-      MarketingCloud.makeRequest(config, method, params,function(res){
-        // console.log('getPageViewsByUrl',res.responseJSON); 
-     let pageViewsData=res.responseJSON;
-     let pageViewJson=res.responseJSON.report.data;
-      
-     foolocation.updateLocationBarChart(pageViewJson);
-        }) ;
-          }, 10000);
+ 
 
  }
 
@@ -124,8 +128,9 @@ var getSiteInstance = (params)=>{
      let pageViewsData=res.responseJSON;
      let pageViewJson=res.responseJSON.report.data; 
         let siteInstanceData=res.responseJSON;
+        
         document.getElementById('instanceViewsContainer').innerText=siteInstanceData.report.totals[0];
-        foos = loadinstanceViewsBarChart('#locationViewsBarChart',580,380,pageViewJson);
+        foos = loadinstanceViewsBarChart('#locationViewsBarChart',580,350,pageViewJson);
     }) ;
 
     setInterval(() => {
@@ -139,11 +144,26 @@ var getSiteInstance = (params)=>{
           }, 10000);
  }
  
- var getSiteGeoRegions = ()=>{
+ var getSiteGeoRegions = (params)=>{
  
+   var foolocation;
     MarketingCloud.makeRequest(config, method, params,function(res){
-        //console.log('getSiteGeoRegions',res.responseJSON);
+        let pageViewsData=res.responseJSON;
+        let pageViewJson=res.responseJSON.report.data; 
+         //   document.getElementById('locationViewsContainer').innerText=pageViewsData.report.data[0].breakdown.length;
+       foolocation= loadlocationBarChart('#locationViewsBarChart',580,380,pageViewJson);
+      // console.log('getPageViewsGeoCity',pageViewJson);
     }) ;
+
+    setInterval(() => {
+      MarketingCloud.makeRequest(config, method, params,function(res){
+        // console.log('getPageViewsByUrl',res.responseJSON); 
+     let pageViewsData=res.responseJSON;
+     let pageViewJson=res.responseJSON.report.data;
+      
+     foolocation.updateLocationBarChart(pageViewJson);
+        }) ;
+          }, 10000);
  } 
  
  var getSitePages = ()=>{
@@ -173,6 +193,12 @@ var getSiteInstance = (params)=>{
     MarketingCloud.makeRequest(config, method, params,function(res){
         //console.log('getLinkGeoREgion',res.responseJSON);
     }) ;
+ }
+
+ var generateCounterNode=(counter,count)=>{
+    var html='';
+    counter=='plus'?html='<i class="las la-arrow-up upColor"></i> '+Math.round(count):html='<i class="las la-arrow-down downColor"></i> '+Math.round(count);
+    document.getElementById('counterDenote').innerHTML=html;
  }
 
 

@@ -1,9 +1,11 @@
 //charts
 var loadBarChart=(id,widths,heights,jsonData)=>{
+  
+ 
 
-
-
-    let dimensions={
+  let box = document.querySelector('.pageViewCard');
+  widths=box.offsetWidth-30;
+  let dimensions={
         width:widths,
         height:heights,
         id:id,
@@ -75,10 +77,11 @@ return {
 }
 
 var loadLineChart=(id,widths,heights,jsonData)=>{
-
-
+  
+  let box = document.querySelector('.lineViewCard');
+  widths=box.offsetWidth-30;
   // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 20, bottom: 30, left: 40},
+  var margin = {top: 20, right: 10, bottom: 20, left: 30},
   width = widths - margin.left - margin.right,
   height = heights - margin.top - margin.bottom;
   
@@ -108,7 +111,7 @@ svg.append("g")
   
 
   function updateLineChart(jsonData) {
-console.log(jsonData);
+// console.log(jsonData);
     let data=manipulateDatejsonData(jsonData);
   // format the data
   data.forEach(function(d) {
@@ -160,7 +163,8 @@ console.log(jsonData);
 }
 
 var loadlocationBarChart=(id,widths,heights,jsonData)=>{
-
+  let box = document.querySelector('.locationViewCard');
+  widths=box.offsetWidth-30;
     let dimensions={
         width:widths,
         height:heights,
@@ -204,7 +208,7 @@ var loadlocationBarChart=(id,widths,heights,jsonData)=>{
   {
     
     let data=manipulateLocationjsonData(jsonData);
-    console.log(data);
+    // console.log(data);
 
     
   // Update the X axis
@@ -219,7 +223,7 @@ var loadlocationBarChart=(id,widths,heights,jsonData)=>{
  // Update the Y axis
  y.domain(data.map(function(d) { return d.name; }));
 
- yAxis.transition().duration(1000).call(d3.axisLeft(y));
+ yAxis.transition().duration(1000).call(d3.axisLeft(y)).selectAll("text").style('font-size','12px');
 
 
   // Create the u variable
@@ -269,7 +273,7 @@ container.append(rows1);
 
 data.forEach(function(item,index){
 let rows=document.createElement('div');
-rows.setAttribute('class','urlViewsChart__Rows');
+index%2==0?rows.setAttribute('class','urlViewsChart__Rows'):rows.setAttribute('class','urlViewsChart__Rows aliceB');
 
 let url=document.createElement('div');
 url.setAttribute('class','urlViewsChart__Url');
@@ -293,9 +297,10 @@ updateUrlChart(data);
 
 var loadinstanceViewsBarChart=(id,widths,heights,jsonData)=>{
 
-
+ let box = document.querySelector('.instanceViewCard');
+ widths=box.offsetWidth-30;
   // set the dimensions and margins of the graph
-const margin = {top: 10, right: 10, bottom: 10, left: 10},
+const margin = {top: 0, right: 0, bottom: 0, left: 0},
 width = widths - margin.left - margin.right,
 height = heights - margin.top - margin.bottom;
 
@@ -369,9 +374,9 @@ const foreignObject=svg
       .attr('width', function (d) { return (d.x1 - d.x0)-10; })
       .attr('height', function (d) { return (d.y1 - d.y0)-10; })    // +20 to adjust position (lower)
       .text(function(d){ return d.data.name})
-      .attr("font-size", "15px")
-       .attr("font-family", "cursive")
-  
+      .attr("font-size", "13px")
+      .attr("font-family", "system-ui")
+      .attr()
       .style("color", "white")
 
    
@@ -528,7 +533,7 @@ var manipulateNamejsonData=(jsonData)=>{
 }
 
 var manipulateLocationjsonData=(jsonData)=>{
-  
+  console.log(jsonData);
   let newArray=[];
   
  
@@ -539,13 +544,13 @@ var manipulateLocationjsonData=(jsonData)=>{
       if(index==0)
      {
          newArray.push({
-          name:item.breakdown[i].name.split(" ")[0],
+          name:item.breakdown[i].name.split('(')[0].substring(0,10),
           val:Number(item.breakdown[i].counts[0])
          })
      }
      else{
        
-         let newItem=newArray.find(x=>x.name===item.breakdown[i].name.split(" ")[0]);
+         let newItem=newArray.find(x=>x.name===item.breakdown[i].name.split('(')[0].substring(0,10));
      
          if(newItem!=undefined)
          newItem.val+=Number(item.breakdown[i].counts[0]);
