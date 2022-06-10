@@ -373,7 +373,7 @@ const foreignObject=svg
       .attr("y", function(d){ return d.y0+5})
       .attr('width', function (d) { return (d.x1 - d.x0)-10; })
       .attr('height', function (d) { return (d.y1 - d.y0)-10; })    // +20 to adjust position (lower)
-      .text(function(d){ return d.data.name})
+      .text(function(d){ return d.data.name + " ("+d.data.val+")"})
       .attr("font-size", "13px")
       .attr("font-family", "system-ui")
       .attr()

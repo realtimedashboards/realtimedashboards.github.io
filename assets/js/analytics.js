@@ -85,7 +85,7 @@ var getPageViews = (params)=>{
          actualCount=currentPageView+1;
          generateCounterNode('plus',actualCount-pageViewPrevious)
        }
-       console.log(pageViewPrevious,currentPageView,actualCount);
+   
        document.getElementById('pageViewsContainer').innerText=Math.round(actualCount).toString();
     
        foo.updateBarChart(pageViewJson);
@@ -128,6 +128,9 @@ var getSiteInstance = (params)=>{
      let pageViewsData=res.responseJSON;
      let pageViewJson=res.responseJSON.report.data; 
         let siteInstanceData=res.responseJSON;
+
+        
+    
         
         document.getElementById('instanceViewsContainer').innerText=siteInstanceData.report.totals[0];
         foos = loadinstanceViewsBarChart('#locationViewsBarChart',580,350,pageViewJson);
@@ -138,7 +141,22 @@ var getSiteInstance = (params)=>{
         // console.log('getPageViewsByUrl',res.responseJSON); 
      let pageViewsData=res.responseJSON;
      let pageViewJson=res.responseJSON.report.data;
-      
+     let siteInstanceData=res.responseJSON;
+
+     let pageViewPrevious=Number(document.getElementById('instanceViewsContainer').innerText);
+     let currentPageView=Number(pageViewsData.report.totals[0]);
+     let actualCount=0;
+     if(currentPageView>pageViewPrevious)
+     {
+       actualCount=currentPageView;
+       generateCounterInstance('plus',actualCount-pageViewPrevious)
+     }
+     else if(currentPageView<pageViewPrevious)
+     {
+       actualCount=currentPageView; 
+       generateCounterInstance('minus',pageViewPrevious-actualCount)
+     }
+     document.getElementById('instanceViewsContainer').innerText=siteInstanceData.report.totals[0];
      foos.updateInstanceChart(pageViewJson);
         }) ;
           }, 10000);
@@ -200,6 +218,10 @@ var getSiteInstance = (params)=>{
     counter=='plus'?html='<i class="las la-arrow-up upColor"></i> '+Math.round(count):html='<i class="las la-arrow-down downColor"></i> '+Math.round(count);
     document.getElementById('counterDenote').innerHTML=html;
  }
-
+ var generateCounterInstance=(counter,count)=>{
+    var html='';
+    counter=='plus'?html='<i class="las la-arrow-up upColor"></i> '+Math.round(count):html='<i class="las la-arrow-down downColor"></i> '+Math.round(count);
+    document.getElementById('counterInstances').innerHTML=html;
+ }
 
 
