@@ -9,7 +9,7 @@ var loadBarChart=(id,widths,heights,jsonData)=>{
         width:widths,
         height:heights,
         id:id,
-        margin:{left:20,right:10,bottom:20,top:10}
+        margin:{left:30,right:10,bottom:20,top:10}
     }
 
    
@@ -499,15 +499,22 @@ var manipulateNamejsonData=(jsonData)=>{
     
    
     jsonData.forEach(function(item,index)
-    {  let i=0;
+    {  
+     
+      let i=0;
         while(i<jsonData[index].breakdown.length)
         {
-        if(index==0)
+          if(index==0)
        {
+         if(item.breakdown[i].name!='coolray:us:en')
+       {
+
+      
            newArray.push({
             name:item.breakdown[i].name,
             val:Number(item.breakdown[i].counts[0])
            })
+           }
        }
        else{
          
@@ -517,10 +524,14 @@ var manipulateNamejsonData=(jsonData)=>{
            newItem.val+=Number(item.breakdown[i].counts[0]);
            else
            {
+            if(item.breakdown[i].name!='coolray:us:en')
+            {
+     
             newArray.push({
                 name:item.breakdown[i].name,
                 val:Number(item.breakdown[i].counts[0])
                })
+              }
            }
 
        }

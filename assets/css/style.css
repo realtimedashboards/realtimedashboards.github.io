@@ -63,10 +63,11 @@
   -webkit-box-shadow: 0 3px 10px #1a1a1a26;
           box-shadow: 0 3px 10px #1a1a1a26;
   border-radius: 6px;
+  min-height: 190px;
 }
 
 .counterView__card_val {
-  font-size: 7.188rem;
+  font-size: 6rem;
   text-align: center;
   font-weight: bold;
   color: #167578;
@@ -82,19 +83,21 @@
 #counterDenote, #counterInstances {
   padding-left: 12px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 #counterDenote .upColor, #counterInstances .upColor {
   color: green;
   position: relative;
   left: 5px;
+  top: 2px;
 }
 
 #counterDenote .downColor, #counterInstances .downColor {
   color: #da0e0e;
   position: relative;
   left: 5px;
+  top: 2px;
 }
 
 .pageViewCard {
@@ -107,7 +110,7 @@
 }
 
 .lineViewCard {
-  min-height: 218px;
+  min-height: 204px;
   width: 100%;
 }
 
@@ -171,7 +174,7 @@
 
 @media only screen and (max-width: 800px) {
   .counterView__card_val {
-    font-size: 5rem;
+    font-size: 4rem;
   }
 }
 

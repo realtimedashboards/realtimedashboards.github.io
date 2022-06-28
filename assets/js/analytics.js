@@ -57,8 +57,8 @@ var getPageViews = (params)=>{
            let pageViewJson=res.responseJSON.report.data;
            document.getElementById('pageViewsContainer').innerText=pageViewsData.report.totals[0];
     
-            foo =  loadBarChart('pageViewsBarChart',580,580,pageViewJson);
-            line= loadLineChart('#pageViewsLineChart',560,190,pageViewJson);
+            foo =  loadBarChart('pageViewsBarChart',580,592,pageViewJson);
+            line= loadLineChart('#pageViewsLineChart',560,180,pageViewJson);
           }) ;
           
     setInterval(() => {
@@ -215,12 +215,12 @@ var getSiteInstance = (params)=>{
 
  var generateCounterNode=(counter,count)=>{
     var html='';
-    counter=='plus'?html='<i class="las la-arrow-up upColor"></i> '+Math.round(count):html='<i class="las la-arrow-down downColor"></i> '+Math.round(count);
+    counter=='plus'?html='<ion-icon class="upColor" name="arrow-round-up"></ion-icon> '+Math.round(count):html='<ion-icon class="downColor" name="arrow-round-down"></ion-icon> '+Math.round(count);
     document.getElementById('counterDenote').innerHTML=html;
  }
  var generateCounterInstance=(counter,count)=>{
     var html='';
-    counter=='plus'?html='<i class="las la-arrow-up upColor"></i> '+Math.round(count):html='<i class="las la-arrow-down downColor"></i> '+Math.round(count);
+    counter=='plus'?html='<ion-icon class="upColor" name="arrow-round-up"></ion-icon> '+Math.round(count):html='<ion-icon class="downColor" name="arrow-round-down"></ion-icon> '+Math.round(count);
     document.getElementById('counterInstances').innerHTML=html;
  }
 
